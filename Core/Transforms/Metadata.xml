@@ -1,9 +1,16 @@
 ﻿<metadata>
-  <!--
+    <!--
   This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
   <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
-  
+
   This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
   <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
   -->
+    <attr path="/api/package[@name='com.adyen.checkout.core.internal.model']/class[@name='PaymentImpl']/method[@name='getAmount' and count(parameter)=0]" name="managedReturn">Com.Adyen.Checkout.Core.Model.IAmount</attr>
+    <attr path="/api/package[@name='com.adyen.checkout.core.internal.model']/class[@name='PaymentMethodImpl']/method[@name='getGroup' and count(parameter)=0]" name="managedReturn">Com.Adyen.Checkout.Core.Model.IPaymentMethod</attr>
+    <attr path="/api/package[@name='com.adyen.checkout.core.internal.model']/class[@name='PaymentMethodImpl']/method[@name='getStoredDetails' and count(parameter)=0]" name="managedReturn">Com.Adyen.Checkout.Core.Model.IStoredDetails</attr>
+    <attr path="/api/package[@name='com.adyen.checkout.core.internal.model']/class[@name='PaymentSessionImpl']/method[@name='getPayment' and count(parameter)=0]" name="managedReturn">Com.Adyen.Checkout.Core.Model.IPayment</attr>
+    <attr path="/api/package[@name='com.adyen.checkout.core.internal.model']/class[@name='StoredDetailsImpl']/method[@name='getCard' and count(parameter)=0]" name="managedReturn">Com.Adyen.Checkout.Core.Model.ICard</attr>
+    <attr path="/api/package[@name='com.adyen.checkout.core.internal']/class[@name='StartPaymentParametersImpl']/method[@name='getPaymentReference' and count(parameter)=0]" name="managedReturn">Com.Adyen.Checkout.Core.IPaymentReference</attr>
+    <attr path="/api/package[@name='com.adyen.checkout.core.internal']/class[@name='StartPaymentParametersImpl']/method[@name='getPaymentSession' and count(parameter)=0]" name="managedReturn">Com.Adyen.Checkout.Core.Model.IPaymentSession</attr>
 </metadata>

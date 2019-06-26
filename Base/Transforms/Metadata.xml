@@ -9,4 +9,6 @@
     <!--<remove-node path="/api/package[@name='com.adyen.checkout.base.internal']/class[@name='JsonObject.DefaultCreator']/method[@name='newArray' and count(parameter)=1 and parameter[1][@type='int']]" />
     <remove-node path="/api/package[@name='com.adyen.checkout.base.internal']/class[@name='JsonObject.DefaultCreator']/method[@name='createFromJson' and count(parameter)=1 and parameter[1][@type='org.json.JSONObject']]" />-->
     <remove-node path="/api/package[@name='com.adyen.checkout.base.internal']/class[@name='JsonObject.DefaultCreator']" />
+
+    <attr path="/api/package[@name='com.adyen.checkout.base.internal']/class[@name='JsonObject.Creator']" name="visibility">public</attr>
 </metadata>
