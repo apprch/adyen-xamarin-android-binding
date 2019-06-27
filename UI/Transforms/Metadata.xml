@@ -1,0 +1,16 @@
+﻿<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+    <remove-node path="/api/package[@name='com.adyen.checkout.ui.internal.common.util']/class[@name='PayButtonUtil']/method[@name='setPayButtonText' and count(parameter)=4 and parameter[1][@type='T'] and parameter[2][@type='com.adyen.checkout.core.model.PaymentMethod'] and parameter[3][@type='android.widget.TextView'] and parameter[4][@type='android.widget.TextView']]" />
+    <remove-node path="/api/package[@name='com.adyen.checkout.ui.internal.sepadirectdebit']/class[@name='IbanSuggestionsAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='com.adyen.checkout.ui.internal.sepadirectdebit.IbanSuggestionViewHolder'] and parameter[2][@type='int']]" />
+    <remove-node path="/api/package[@name='com.adyen.checkout.ui.internal.sepadirectdebit']/class[@name='CountryAdapter']/method[@name='onBindViewHolder' and count(parameter)=2 and parameter[1][@type='com.adyen.checkout.ui.internal.sepadirectdebit.IbanSuggestionViewHolder'] and parameter[2][@type='int']]" />
+
+    <attr path="/api/package[@name='com.adyen.checkout.ui.internal.common.model']/class[@name='UpdateCheckoutMethodsCallable']/method[@name='call' and count(parameter)=0]" name="managedReturn">Java.Lang.Object</attr>
+    <attr path="/api/package[@name='com.adyen.checkout.ui.internal.sepadirectdebit']/class[@name='CountryAdapter']/method[@name='onCreateViewHolder' and count(parameter)=2 and parameter[1][@type='android.view.ViewGroup'] and parameter[2][@type='int']]" name="managedReturn">Android.Support.V7.Widget.RecyclerView.ViewHolder</attr>
+    <attr path="/api/package[@name='com.adyen.checkout.ui.internal.sepadirectdebit']/class[@name='IbanSuggestionsAdapter']/method[@name='onCreateViewHolder' and count(parameter)=2 and parameter[1][@type='android.view.ViewGroup'] and parameter[2][@type='int']]" name="managedReturn">Android.Support.V7.Widget.RecyclerView.ViewHolder</attr>
+</metadata>
