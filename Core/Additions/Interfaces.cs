@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Android.Runtime;
 
 //These interfaces were missing after the code generation.
-//Maybe they need some methods too?
+//It seems to work fine with just these empty interfaces, but should need arise, the originals can be found at
+//https://github.com/Adyen/adyen-android/tree/2.4.5/checkout-core/src/main/java/com/adyen/checkout/core/internal/persistence
 
 namespace Com.Adyen.Checkout.Core.Internal.Persistence
 {
-    public interface IPaymentSessionDao : global::Android.Runtime.IJavaObject
+	public interface IPaymentSessionDao : IJavaObject
 	{
 
-    }
+	}
 
-	public interface IPaymentInitiationResponseDao : global::Android.Runtime.IJavaObject
+	public interface IPaymentInitiationResponseDao : IJavaObject
 	{
 
 	}

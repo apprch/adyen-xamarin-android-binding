@@ -66,6 +66,12 @@
     <Reference Include="Xamarin.Android.Arch.Lifecycle.ViewModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Arch.Lifecycle.ViewModel.1.1.1.1\lib\monoandroid90\Xamarin.Android.Arch.Lifecycle.ViewModel.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Android.Arch.Persistence.Db, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Arch.Persistence.Db.1.1.1.1\lib\monoandroid90\Xamarin.Android.Arch.Persistence.Db.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Arch.Persistence.Db.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Arch.Persistence.Db.Framework.1.1.1.1\lib\monoandroid90\Xamarin.Android.Arch.Persistence.Db.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.28.0.0.1\lib\monoandroid90\Xamarin.Android.Support.Animated.Vector.Drawable.dll</HintPath>
     </Reference>
@@ -229,6 +235,8 @@
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Transition.28.0.0.1\build\monoandroid90\Xamarin.Android.Support.Transition.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Transition.28.0.0.1\build\monoandroid90\Xamarin.Android.Support.Transition.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Design.28.0.0.1\build\monoandroid90\Xamarin.Android.Support.Design.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Design.28.0.0.1\build\monoandroid90\Xamarin.Android.Support.Design.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Arch.Lifecycle.Extensions.1.1.1.1\build\monoandroid90\Xamarin.Android.Arch.Lifecycle.Extensions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Arch.Lifecycle.Extensions.1.1.1.1\build\monoandroid90\Xamarin.Android.Arch.Lifecycle.Extensions.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Android.Arch.Persistence.Db.1.1.1.1\build\Xamarin.Android.Arch.Persistence.Db.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Arch.Persistence.Db.1.1.1.1\build\Xamarin.Android.Arch.Persistence.Db.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Android.Arch.Persistence.Db.Framework.1.1.1.1\build\Xamarin.Android.Arch.Persistence.Db.Framework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Arch.Persistence.Db.Framework.1.1.1.1\build\Xamarin.Android.Arch.Persistence.Db.Framework.targets'))" />
   </Target>
   <Import Project="..\packages\Xamarin.Android.Arch.Core.Common.1.1.1.1\build\monoandroid90\Xamarin.Android.Arch.Core.Common.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Core.Common.1.1.1.1\build\monoandroid90\Xamarin.Android.Arch.Core.Common.targets')" />
   <Import Project="..\packages\Xamarin.Android.Arch.Core.Runtime.1.1.1.1\build\monoandroid90\Xamarin.Android.Arch.Core.Runtime.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Core.Runtime.1.1.1.1\build\monoandroid90\Xamarin.Android.Arch.Core.Runtime.targets')" />
@@ -265,6 +273,8 @@
   <Import Project="..\packages\Xamarin.Android.Support.Transition.28.0.0.1\build\monoandroid90\Xamarin.Android.Support.Transition.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Transition.28.0.0.1\build\monoandroid90\Xamarin.Android.Support.Transition.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.Design.28.0.0.1\build\monoandroid90\Xamarin.Android.Support.Design.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Design.28.0.0.1\build\monoandroid90\Xamarin.Android.Support.Design.targets')" />
   <Import Project="..\packages\Xamarin.Android.Arch.Lifecycle.Extensions.1.1.1.1\build\monoandroid90\Xamarin.Android.Arch.Lifecycle.Extensions.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Lifecycle.Extensions.1.1.1.1\build\monoandroid90\Xamarin.Android.Arch.Lifecycle.Extensions.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Arch.Persistence.Db.1.1.1.1\build\Xamarin.Android.Arch.Persistence.Db.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Persistence.Db.1.1.1.1\build\Xamarin.Android.Arch.Persistence.Db.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Arch.Persistence.Db.Framework.1.1.1.1\build\Xamarin.Android.Arch.Persistence.Db.Framework.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Persistence.Db.Framework.1.1.1.1\build\Xamarin.Android.Arch.Persistence.Db.Framework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
