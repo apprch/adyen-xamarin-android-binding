@@ -259,3 +259,9 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# Ignore the Android packages
+**/[Jj]ars/*.aar
+
+# Ignore everything under build/tools
+[Bb]uild/[Tt]ools
