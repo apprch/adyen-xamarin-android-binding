@@ -76,11 +76,12 @@ void DownloadAdyenPackages(bool force = false)
 {
     var packages = new Dictionary<string, string> {
         { "https://jcenter.bintray.com/com/adyen/cse/adyen-cse/1.0.5/adyen-cse-1.0.5.aar", $"{projectBaseDir}/AdyenCse/Jars/adyen-cse-1.0.5.aar" },
-        { "https://jcenter.bintray.com/com/adyen/checkout/base/2.4.5/base-2.4.5.aar", $"{projectBaseDir}/Base/Jars/base-2.4.5.aar" },
-        { "https://jcenter.bintray.com/com/adyen/checkout/core/2.4.5/core-2.4.5.aar", $"{projectBaseDir}/Core/Jars/core-2.4.5.aar" },
-        { "https://jcenter.bintray.com/com/adyen/checkout/core-card/2.4.5/core-card-2.4.5.aar", $"{projectBaseDir}/CoreCard/Jars/core-card-2.4.5.aar" },
-        { "https://jcenter.bintray.com/com/adyen/checkout/ui/2.4.5/ui-2.4.5.aar", $"{projectBaseDir}/UI/Jars/ui-2.4.5.aar" },
-        { "https://jcenter.bintray.com/com/adyen/checkout/util/2.4.5/util-2.4.5.aar", $"{projectBaseDir}/Util/Jars/util-2.4.5.aar" }
+		{ "https://jcenter.bintray.com/com/adyen/checkout/base-ui/3.2.0/base-ui-3.2.0.aar", $"{projectBaseDir}/BaseUI/Jars/base-ui-3.2.0.aar"},
+		{ "https://jcenter.bintray.com/com/adyen/checkout/base-v3/3.2.0/base-v3-3.2.0.aar", $"{projectBaseDir}/BaseV3/Jars/base-v3-3.2.0.aar"},
+		{ "https://jcenter.bintray.com/com/adyen/checkout/card-base/3.2.0/card-base-3.2.0.aar", $"{projectBaseDir}/CardBase/Jars/card-base-3.2.0.aar"},
+		{ "https://jcenter.bintray.com/com/adyen/checkout/card-ui/3.2.0/card-ui-3.2.0.aar", $"{projectBaseDir}/CardUI/Jars/card-ui-3.2.0.aar"},
+		{ "https://jcenter.bintray.com/com/adyen/checkout/core-v3/3.2.0/core-v3-3.2.0.aar", $"{projectBaseDir}/CoreV3/Jars/core-v3-3.2.0.aar"},
+		{ "https://jcenter.bintray.com/com/adyen/checkout/cse/3.2.0/cse-3.2.0.aar", $"{projectBaseDir}/Cse/Jars/cse-3.2.0.aar"}
     };
 
     foreach(var package in packages) {
