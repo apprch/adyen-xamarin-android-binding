@@ -1,0 +1,17 @@
+﻿<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+
+    <remove-node path="/api/package[@name='com.adyen.checkout.card']/class[@name='CardComponent']/method[@name='onInputDataChanged' and count(parameter)=1 and parameter[1][@type='com.adyen.checkout.card.data.input.CardInputData']]" />
+    <remove-node path="/api/package[@name='com.adyen.checkout.card']/class[@name='CardComponentProvider']/method[@name='get' and count(parameter)=3 and parameter[1][@type='android.support.v4.app.Fragment'] and parameter[2][@type='com.adyen.checkout.base.model.paymentmethods.PaymentMethod'] and parameter[3][@type='com.adyen.checkout.card.CardConfiguration']]" />
+    <remove-node path="/api/package[@name='com.adyen.checkout.card']/class[@name='CardComponentProvider']/method[@name='get' and count(parameter)=3 and parameter[1][@type='android.support.v4.app.FragmentActivity'] and parameter[2][@type='com.adyen.checkout.base.model.paymentmethods.PaymentMethod'] and parameter[3][@type='com.adyen.checkout.card.CardConfiguration']]" />
+    <remove-node path="/api/package[@name='com.adyen.checkout.card']/class[@name='CardComponentProvider']/method[@name='isAvailable' and count(parameter)=4 and parameter[1][@type='android.app.Application'] and parameter[2][@type='com.adyen.checkout.base.model.paymentmethods.PaymentMethod'] and parameter[3][@type='com.adyen.checkout.card.CardConfiguration'] and parameter[4][@type='com.adyen.checkout.base.ComponentAvailableCallback&lt;com.adyen.checkout.card.CardConfiguration&gt;']]" />
+
+    <attr path="/api/package[@name='com.adyen.checkout.card']/class[@name='CardComponent']/method[@name='createOutputData' and count(parameter)=1 and parameter[1][@type='com.adyen.checkout.base.model.paymentmethods.PaymentMethod']]" name="managedReturn">Java.Lang.Object</attr>
+    <attr path="/api/package[@name='com.adyen.checkout.card']/class[@name='CardConfiguration.Builder']/method[@name='build' and count(parameter)=0]" name="managedReturn">Java.Lang.Object</attr>
+</metadata>

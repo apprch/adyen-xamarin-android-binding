@@ -5,13 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D4ECB222-27FE-49BB-9702-1DB059451E5F}</ProjectGuid>
+    <ProjectGuid>{FAB4D144-EB5C-4CFA-AB43-F01BE6304047}</ProjectGuid>
     <ProjectTypeGuids>{10368E6C-D01B-4462-8E8B-01FC667A7035};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{77efb91c-a7e9-4b0e-a7c5-31eeec3c6d46}</TemplateGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BaseUI</RootNamespace>
-    <AssemblyName>BaseUI</AssemblyName>
+    <RootNamespace>CardUI</RootNamespace>
+    <AssemblyName>CardUI</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
@@ -42,13 +42,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Additions\ClickableListRecyclerAdapter.cs" />
+    <Compile Include="Additions\CardListAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Jars\AboutJars.txt" />
     <None Include="Additions\AboutAdditions.txt" />
-    <LibraryProjectZip Include="Jars\base-ui-3.2.0.aar" />
+    <LibraryProjectZip Include="Jars\card-ui-3.2.0.aar" />
   </ItemGroup>
   <ItemGroup>
     <TransformFile Include="Transforms\Metadata.xml" />
@@ -56,6 +56,14 @@
     <TransformFile Include="Transforms\EnumMethods.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdyenCse\AdyenCse.csproj">
+      <Project>{9a569215-ebe2-46d0-841a-571445252c9e}</Project>
+      <Name>AdyenCse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseUI\BaseUI.csproj">
+      <Project>{d4ecb222-27fe-49bb-9702-1db059451e5f}</Project>
+      <Name>BaseUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BaseV3\BaseV3.csproj">
       <Project>{ca1c4954-69fe-4d02-82a7-e87044fa358f}</Project>
       <Name>BaseV3</Name>
@@ -64,12 +72,13 @@
       <Project>{1ca7dcbf-70bf-46fb-b166-72d29fbfd3d9}</Project>
       <Name>CoreV3</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Cse\Cse.csproj">
+      <Project>{5c45c3a2-c8eb-485d-9744-34cf25dc6815}</Project>
+      <Name>Cse</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
-      <Version>28.0.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView">
+    <PackageReference Include="Xamarin.Android.Support.Design">
       <Version>28.0.0.1</Version>
     </PackageReference>
   </ItemGroup>
