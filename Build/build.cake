@@ -11,11 +11,12 @@ var configuration = Argument("configuration", "Release");
 
 var projects = new[] {
     "AdyenCse",
-    "Base",
-    "Core",
-    "CoreCard",
-    "UI",
-    "Util"
+	"BaseUI",
+    "BaseV3",
+    "CardBase",
+    "CardUI",
+	"CoreV3",
+    "Cse"
 };
 
 var artifactDir = "../Artifacts";
@@ -79,7 +80,7 @@ void DownloadAdyenPackages(bool force = false)
 		{ "https://jcenter.bintray.com/com/adyen/checkout/base-ui/3.2.0/base-ui-3.2.0.aar", $"{projectBaseDir}/BaseUI/Jars/base-ui-3.2.0.aar"},
 		{ "https://jcenter.bintray.com/com/adyen/checkout/base-v3/3.2.0/base-v3-3.2.0.aar", $"{projectBaseDir}/BaseV3/Jars/base-v3-3.2.0.aar"},
 		{ "https://jcenter.bintray.com/com/adyen/checkout/card-base/3.2.0/card-base-3.2.0.aar", $"{projectBaseDir}/CardBase/Jars/card-base-3.2.0.aar"},
-		{ "https://jcenter.bintray.com/com/adyen/checkout/card-ui/3.2.0/card-ui-3.2.0.aar", $"{projectBaseDir}/CardUI/Jars/card-ui-3.2.0.aar"},
+		/*{ "https://jcenter.bintray.com/com/adyen/checkout/card-ui/3.2.0/card-ui-3.2.0.aar", $"{projectBaseDir}/CardUI/Jars/card-ui-3.2.0.aar"},*/
 		{ "https://jcenter.bintray.com/com/adyen/checkout/core-v3/3.2.0/core-v3-3.2.0.aar", $"{projectBaseDir}/CoreV3/Jars/core-v3-3.2.0.aar"},
 		{ "https://jcenter.bintray.com/com/adyen/checkout/cse/3.2.0/cse-3.2.0.aar", $"{projectBaseDir}/Cse/Jars/cse-3.2.0.aar"}
     };

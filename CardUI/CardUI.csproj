@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Additions\CardListAdapter.cs" />
+    <Compile Include="Additions\CardView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +68,10 @@
     <ProjectReference Include="..\BaseV3\BaseV3.csproj">
       <Project>{ca1c4954-69fe-4d02-82a7-e87044fa358f}</Project>
       <Name>BaseV3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CardBase\CardBase.csproj">
+      <Project>{24f68379-b182-41a4-8316-01f33bb2385c}</Project>
+      <Name>CardBase</Name>
     </ProjectReference>
     <ProjectReference Include="..\CoreV3\CoreV3.csproj">
       <Project>{1ca7dcbf-70bf-46fb-b166-72d29fbfd3d9}</Project>
