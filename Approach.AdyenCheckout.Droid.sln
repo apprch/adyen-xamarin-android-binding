@@ -36,6 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildScripts", "BuildScript
 		Build\build.cake = Build\build.cake
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoAppV3", "DemoAppV3\DemoAppV3.csproj", "{F295C15A-224A-48F3-97EA-CB151802310A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,6 +98,12 @@ Global
 		{FAB4D144-EB5C-4CFA-AB43-F01BE6304047}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAB4D144-EB5C-4CFA-AB43-F01BE6304047}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAB4D144-EB5C-4CFA-AB43-F01BE6304047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F295C15A-224A-48F3-97EA-CB151802310A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F295C15A-224A-48F3-97EA-CB151802310A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F295C15A-224A-48F3-97EA-CB151802310A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F295C15A-224A-48F3-97EA-CB151802310A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F295C15A-224A-48F3-97EA-CB151802310A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F295C15A-224A-48F3-97EA-CB151802310A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
