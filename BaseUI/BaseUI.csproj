@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BaseUI.nuspec" />
     <None Include="Jars\AboutJars.txt" />
     <None Include="Additions\AboutAdditions.txt" />
     <LibraryProjectZip Include="Jars\base-ui-3.2.0.aar" />

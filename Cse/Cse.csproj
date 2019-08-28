@@ -45,6 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Cse.nuspec" />
     <None Include="Jars\AboutJars.txt" />
     <None Include="Additions\AboutAdditions.txt" />
     <LibraryProjectZip Include="Jars\cse-3.2.0.aar" />
