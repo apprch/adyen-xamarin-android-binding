@@ -16,7 +16,8 @@ var projects = new[] {
     "CardBase",
     "CardUI",
 	"CoreV3",
-    "Cse"
+    "Cse",
+	"Redirect"
 };
 
 var artifactDir = "../Artifacts";
@@ -82,7 +83,8 @@ void DownloadAdyenPackages(bool force = false)
 		{ "https://jcenter.bintray.com/com/adyen/checkout/card-base/3.2.0/card-base-3.2.0.aar", $"{projectBaseDir}/CardBase/Jars/card-base-3.2.0.aar"},
 		/*{ "https://jcenter.bintray.com/com/adyen/checkout/card-ui/3.2.0/card-ui-3.2.0.aar", $"{projectBaseDir}/CardUI/Jars/card-ui-3.2.0.aar"},  This package is bug-fixed locally and should not be downloaded */
 		{ "https://jcenter.bintray.com/com/adyen/checkout/core-v3/3.2.0/core-v3-3.2.0.aar", $"{projectBaseDir}/CoreV3/Jars/core-v3-3.2.0.aar"},
-		{ "https://jcenter.bintray.com/com/adyen/checkout/cse/3.2.0/cse-3.2.0.aar", $"{projectBaseDir}/Cse/Jars/cse-3.2.0.aar"}
+		{ "https://jcenter.bintray.com/com/adyen/checkout/cse/3.2.0/cse-3.2.0.aar", $"{projectBaseDir}/Cse/Jars/cse-3.2.0.aar"},
+		{ "https://jcenter.bintray.com/com/adyen/checkout/redirect/3.2.0/redirect-3.2.0.aar", $"{projectBaseDir}/Redirect/Jars/redirect-3.2.0.aar"}
     };
 
     foreach(var package in packages) {

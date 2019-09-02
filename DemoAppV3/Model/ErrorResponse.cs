@@ -7,7 +7,8 @@ namespace DemoAppV3.Model
 	{
 		public string Type { get; set; }
 		public string ErrorCode { get; set; }
-		public string ErrorMessage { get; set; }
+		public string Message { get; set; }
+		public string ErrorType { get; set; }
 	}
 }
 

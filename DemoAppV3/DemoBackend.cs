@@ -21,11 +21,11 @@ namespace DemoAppV3
 			{
 				var response = await client.PostJsonAsync($"{BaseUri.AbsolutePath}paymentMethods", new
 				{
-					Config.CountryCode,
-					Config.MerchantAccount,
+					countryCode = Config.CountryCode,
+					merchantAccount = Config.MerchantAccount,
 					amount = new
 					{
-						Config.Currency,
+						currency = Config.Currency,
 						value = amount * 100 //I think we need to multiply by 100
 					},
 					channel = "Android"
@@ -39,7 +39,7 @@ namespace DemoAppV3
 				}
 
 				var errorData = await response.Content.DeserializeJsonAsync<ErrorResponse>();
-				Android.Util.Log.Error("DemoBackend", $"{errorData.ErrorMessage} ({errorData.ErrorCode})");
+				Android.Util.Log.Error("DemoBackend", $"{errorData.Message} ({errorData.ErrorCode})");
 
 				return new List<Com.Adyen.Checkout.Base.Model.Paymentmethods.PaymentMethod>();
 			}
@@ -62,23 +62,23 @@ namespace DemoAppV3
 			{
 				var response = await client.PostJsonAsync($"{BaseUri.AbsolutePath}payments", new
 				{
-					Config.CountryCode,
-					Config.ShopperLocale,
-					Config.MerchantAccount,
+					countryCode = Config.CountryCode,
+					shopperLocale = Config.ShopperLocale,
+					merchantAccount = Config.MerchantAccount,
 					reference = Guid.NewGuid().ToString(), //We just make this up!
 					amount = new
 					{
-						Config.Currency,
+						currency = Config.Currency,
 						value = amount * 100 //I think we need to multiply by 100
 					},
 					returnUrl,
 					paymentMethod = new
 					{
-						paymentMethod.Type,
-						paymentMethod.EncryptedCardNumber,
-						paymentMethod.EncryptedExpiryMonth,
-						paymentMethod.EncryptedExpiryYear,
-						paymentMethod.EncryptedSecurityCode
+						type = paymentMethod.Type,
+						encryptedCardNumber = paymentMethod.EncryptedCardNumber,
+						encryptedExpiryMonth = paymentMethod.EncryptedExpiryMonth,
+						encryptedExpiryYear = paymentMethod.EncryptedExpiryYear,
+						encryptedSecurityCode = paymentMethod.EncryptedSecurityCode
 					},
 					//This is for 3D Secure
 					additionalData = new { executeThreeD = true, allow3DS2 = false },
@@ -96,11 +96,44 @@ namespace DemoAppV3
 				else
 				{
 					var errorData = await response.Content.DeserializeJsonAsync<ErrorResponse>();
-					Android.Util.Log.Error("DemoBackend", $"{errorData.ErrorMessage} ({errorData.ErrorCode})");
+					Android.Util.Log.Error("DemoBackend", $"{errorData.Message} ({errorData.ErrorCode})");
 					return new PaymentsResponse
 					{
 						ResultCode = "Error",
-						RefusalReason = errorData.ErrorMessage,
+						RefusalReason = $"{errorData.Message} ({errorData.ErrorType})",
+						RefusalReasonCode = errorData.ErrorCode
+					};
+				}
+			}
+		}
+
+		public static async Task<PaymentsResponse> GetPaymentDetails(string paRes, string md, string paymentData)
+		{
+			using (var client = CreateHttpClient())
+			{
+				var response = await client.PostJsonAsync($"{BaseUri.AbsolutePath}payments/details", new
+				{
+					details = new
+					{
+						PaRes = paRes,
+						MD = md
+					},
+					paymentData
+				});
+
+				if (response.IsSuccessStatusCode)
+				{
+					var responseData = await response.Content.DeserializeJsonAsync<PaymentsResponse>();
+					return responseData;
+				}
+				else
+				{
+					var errorData = await response.Content.DeserializeJsonAsync<ErrorResponse>();
+					Android.Util.Log.Error("DemoBackend", $"{errorData.Message} ({errorData.ErrorCode})");
+					return new PaymentsResponse
+					{
+						ResultCode = "Error",
+						RefusalReason = $"{errorData.Message} ({errorData.ErrorType})",
 						RefusalReasonCode = errorData.ErrorCode
 					};
 				}
@@ -124,13 +157,23 @@ namespace DemoAppV3
 	{
 		private static readonly JsonSerializerSettings settings = new JsonSerializerSettings
 		{
-			ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+			ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver
+			{
+				NamingStrategy = new Newtonsoft.Json.Serialization.DefaultNamingStrategy
+				{
+					OverrideSpecifiedNames = false
+				}
+			}
 		};
 
 
 		public static Task<HttpResponseMessage> PostJsonAsync(this HttpClient client, string requestUri, object data)
 		{
-			var content = new StringContent(JsonConvert.SerializeObject(data, settings), Encoding.UTF8, "application/json");
+			var json = JsonConvert.SerializeObject(data, settings);
+
+			//DebugLog($"POST {requestUri}\r\n{json}");
+
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
 			return client.PostAsync(requestUri, content);
 		}
 
@@ -139,14 +182,16 @@ namespace DemoAppV3
 			if (content.Headers.ContentType.MediaType != "application/json")
 				throw new InvalidOperationException($"Content type is {content.Headers.ContentType.MediaType}, expected appliation/json!");
 
-			var str = await content.ReadAsStringAsync();
+			var json = await content.ReadAsStringAsync();
 
-			if (string.IsNullOrWhiteSpace(str))
+			if (string.IsNullOrWhiteSpace(json))
 				throw new InvalidOperationException($"Content was empty!");
+
+			//DebugLog($"Response\r\n{json}");
 
 			try
 			{
-				var data = JsonConvert.DeserializeObject<T>(str);
+				var data = JsonConvert.DeserializeObject<T>(json);
 				return data;
 			}
 			catch (Exception ex)
@@ -154,6 +199,19 @@ namespace DemoAppV3
 				Android.Util.Log.Error("HttpClientExtensions", Java.Lang.Throwable.FromException(ex), "Could not deserialize content");
 				return null;
 			}
+		}
+
+		private static void DebugLog(string str)
+		{
+			var maxSize = 2000;
+			var index = 0;
+
+			while (index < str.Length)
+			{
+				var s = index + maxSize < str.Length ? str.Substring(index, maxSize) : str.Substring(index);
+				index += maxSize;
+				Android.Util.Log.Debug("DemoBackend", s);
+			};
 		}
 	}
 }

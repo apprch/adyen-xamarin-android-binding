@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
+using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -10,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Com.Adyen.Checkout.Base.Model.Payments.Request;
 using Com.Adyen.Checkout.Card;
+using DemoAppV3.Model;
 using Java.Lang;
 
 namespace DemoAppV3
@@ -28,7 +31,12 @@ namespace DemoAppV3
 		public const string Currency = "EUR";
 	}
 
-	[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+	[Activity(Name = "com.companyname.demoappv3.MainActivity", Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true, LaunchMode = LaunchMode.SingleTask)]
+	[IntentFilter(
+		new[] { Intent.ActionView },
+		Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
+		DataScheme = "adyencheckout",
+		DataHost = "com.companyname.demoappv3")]
 	public class MainActivity : AppCompatActivity
 	{
 		RelativeLayout layout;
@@ -37,6 +45,7 @@ namespace DemoAppV3
 
 		CardPaymentMethod paymentMethod;
 		private decimal amount = 10;
+		Com.Adyen.Checkout.Redirect.RedirectComponent redirectComponent;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -45,7 +54,8 @@ namespace DemoAppV3
 			SetContentView(Resource.Layout.activity_main);
 
 			Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-			SetSupportActionBar(toolbar);
+			if (SupportActionBar == null)
+				SetSupportActionBar(toolbar);
 
 			fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
 			fab.Enabled = false;
@@ -57,19 +67,17 @@ namespace DemoAppV3
 			InitPaymentForm();
 		}
 
-		private void PayButton_Click(object sender, EventArgs e)
+		protected override void OnResume()
 		{
-			View view = (View)sender;
+			base.OnResume();
 
-			Task.Run(async () =>
+			var intent = Intent;
+
+			if (intent?.Data?.ToString()?.StartsWith(Com.Adyen.Checkout.Redirect.RedirectUtil.RedirectResultScheme) == true)
 			{
-				var paymentResult = await DemoBackend.ExecutePayment(paymentMethod, "adyencheckout://com.companyname.demoappv3", amount);
+				redirectComponent?.HandleRedirectResponse(intent.Data);
+			}
 
-				var message = paymentResult.ResultCode;
-				if (!string.IsNullOrWhiteSpace(paymentResult.RefusalReason))
-					message += $" - {paymentResult.RefusalReason} ({paymentResult.RefusalReasonCode})";
-				RunOnUiThread(() => Snackbar.Make(view, message, Snackbar.LengthLong).Show());
-			});
 		}
 
 		public override bool OnCreateOptionsMenu(IMenu menu)
@@ -119,7 +127,7 @@ namespace DemoAppV3
 						layout.AddView(cardView, cardLayout);
 						textViewLoading.Visibility = ViewStates.Gone;
 
-						cardComponent.Observe(this, new ObserverImpl
+						cardComponent.Observe(this, new PaymentComponentObserver
 						{
 							Changed = state =>
 							{
@@ -145,17 +153,72 @@ namespace DemoAppV3
 
 
 			});
-
-
 		}
-		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+
+		private void PayButton_Click(object sender, EventArgs e)
+		{
+			Task.Run(async () =>
+			{
+				var paymentResult = await DemoBackend.ExecutePayment(paymentMethod, "adyencheckout://com.companyname.demoappv3", amount);
+
+				if (paymentResult.ResultCode == "RedirectShopper")
+				{
+					HandleRedirect(paymentResult);
+					return;
+				}
+
+				ShowPaymentStatus(paymentResult);
+			});
+		}
+
+		private void ShowPaymentStatus(PaymentsResponse paymentResult)
+		{
+			var message = paymentResult.ResultCode;
+
+			if (paymentResult.ResultCode == "Authorised")
+				message += $" ({paymentResult.PspReference})";
+			else if (!string.IsNullOrWhiteSpace(paymentResult.RefusalReasonCode))
+				message += $" - {paymentResult.RefusalReason} ({paymentResult.RefusalReasonCode})";
+			RunOnUiThread(() => Snackbar.Make(layout, message, Snackbar.LengthLong).Show());
+		}
+
+		void HandleRedirect(PaymentsResponse paymentResult)
+		{
+			redirectComponent = Com.Adyen.Checkout.Redirect.RedirectComponent.Provider.Get(this) as Com.Adyen.Checkout.Redirect.RedirectComponent;
+			redirectComponent.Observe(this, new RedirectComponentObserver {
+				Changed = data =>
+				{
+					var paymentData = data.Details.GetString("paymentData");
+					var details = data.Details.GetJSONObject("details");
+					var paRes = details.GetString("PaRes");
+					var md = details.GetString("MD");
+
+					Android.Util.Log.Debug("ObserverImpl", $"paymentData: {paymentData}");
+					Task.Run(async () =>
+					{
+						var result = await DemoBackend.GetPaymentDetails(paRes, md, paymentData);
+						ShowPaymentStatus(result);
+					});
+				}
+			});
+
+			redirectComponent.HandleAction(this, paymentResult.Action.AsRedirectAction());
+		}
+
+		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
 		{
 			Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
 			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 		}
 
-		public class ObserverImpl : Java.Lang.Object, Android.Arch.Lifecycle.IObserver
+		protected override void OnNewIntent(Intent intent)
+		{
+			base.OnNewIntent(intent);
+			Intent = intent;
+		}
+
+		public class PaymentComponentObserver : Java.Lang.Object, Android.Arch.Lifecycle.IObserver
 		{
 			public Action<Com.Adyen.Checkout.Base.PaymentComponentState> Changed;
 
@@ -163,6 +226,17 @@ namespace DemoAppV3
 			{
 				if (p0 is Com.Adyen.Checkout.Base.PaymentComponentState state)
 					Changed?.Invoke(state);
+			}
+		}
+
+		public class RedirectComponentObserver : Java.Lang.Object, Android.Arch.Lifecycle.IObserver
+		{
+			public Action<Com.Adyen.Checkout.Base.ActionComponentData> Changed;
+
+			public void OnChanged(Java.Lang.Object p0)
+			{
+				if (p0 is Com.Adyen.Checkout.Base.ActionComponentData data)
+					Changed?.Invoke(data);
 			}
 		}
 	}

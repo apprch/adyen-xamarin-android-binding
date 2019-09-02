@@ -145,6 +145,10 @@
       <Project>{5c45c3a2-c8eb-485d-9744-34cf25dc6815}</Project>
       <Name>Cse</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Redirect\Redirect.csproj">
+      <Project>{0df5ce7c-ff06-4272-a42a-a47e565bb96a}</Project>
+      <Name>Redirect</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_euro.xml">
