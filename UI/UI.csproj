@@ -178,10 +178,6 @@
     <TransformFile Include="Transforms\EnumMethods.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Base\Base.csproj">
-      <Project>{1d355465-e468-454c-b957-f993880fac32}</Project>
-      <Name>Base</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CoreCard\CoreCard.csproj">
       <Project>{abe5f0f0-3951-48fe-925e-1fd88d3ee250}</Project>
       <Name>CoreCard</Name>

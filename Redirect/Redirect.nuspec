@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Approach.Adyen.Redirect.Droid</id>
+        <version>3.2.0</version>
+        <description>Xamarin Binding Library - Adyen Redirect Android SDK</description>
+        <authors>Approach</authors>
+        <owners>Approach</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <title>Adyen Checkout Redirect Bindings for Android</title>
+        <releaseNotes>Bindings for com.adyen.checkout.redirect version 3.2.0</releaseNotes>
+        <summary>Xamarin Android Bindings for Adyen Checkout Redirect version 3.2.0</summary>
+        <iconUrl>https://www.adyen.com/dam/jcr:39adc4db-76f7-4b9e-aec6-bfa21db4153c/adyen-logo-green.png</iconUrl>
+        <license type="expression">MIT</license>
+        <projectUrl>https://github.com/apprch/adyen-xamarin-android-binding/</projectUrl>
+        <copyright>Copyright (c) 2019 Approach</copyright>
+        <tags>Xamarin.Android, Adyen, sdk</tags>
+        <dependencies>
+            <dependency id="Xamarin.Android.Support.CustomTabs" version="28.0.0.1" />
+            <dependency id="Approach.Adyen.BaseUI.Droid" version="3.2.0" />
+        </dependencies>
+    </metadata>
+</package>
